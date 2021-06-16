@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Latest from './components/Latest'
+import NowPlaying from './components/NowPlaying';
+import Popular from './components/Popular';
 
-function App() {
+const App = () => {
+  const [selectedTab, selectTab] = useState('latest')
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav>
+        <div onClick={() => selectTab('latest')}>Latest</div>
+        <div onClick={() => selectTab('now-playing')}>Now Playing</div>
+        <div onClick={() => selectTab('popular')}>Popular</div>
+        <div onClick={() => selectTab('top-rated')}>Top Rated</div>
+        <div onClick={() => selectTab('upcoming')}>Upcoming</div>
+      </nav>
+      <div className="content">
+        {selectedTab === 'latest' && <Latest />}
+        {selectedTab === 'popular' && <Popular />}
+        {selectedTab === 'now-playing' && <NowPlaying />}
+      </div>
     </div>
   );
 }
